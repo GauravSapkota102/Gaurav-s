@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - CodeWithGaurav</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjusted for static serving -->
+    <script>
+      // Tailwind JIT configuration
+      tailwind.config = {
+        content: ["./*.html", "./public/js/**/*.js"],
+        theme: {
+          extend: {
+            transitionProperty: {
+              'height': 'height',
+              'spacing': 'margin, padding',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              }
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+              fadeIn: 'fadeIn 0.5s ease-out forwards',
+            }
+          },
+        },
+        plugins: [],
+      }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold hover:text-gray-300 transition-colors">CodeWithGaurav</a>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="/" class="hover:text-gray-400 transition-colors">Home</a>
+                <a href="/courses" class="hover:text-gray-400 transition-colors text-yellow-400 font-semibold">Courses</a>
+                <a href="/tutorials" class="hover:text-gray-400 transition-colors">Tutorials</a> 
+                <a href="/projects" class="hover:text-gray-400 transition-colors">Projects</a>
+                <a href="/notes" class="hover:text-gray-400 transition-colors">Notes</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Blog</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Contact</a>
+                <a id="login-nav-item" href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Login</a>
+                <a id="register-nav-item" href="/register" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Register</a>
+                <div id="logged-in-user-info" class="text-sm text-gray-300"></div>
+                <button id="logout-nav-item" style="display:none;" onclick="logoutUser()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Logout</button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden mt-2 space-y-2">
+            <a href="/" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Home</a>
+            <a href="/courses" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors text-yellow-400 font-semibold">Courses</a>
+            <a href="/tutorials" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Tutorials</a>
+            <a href="/projects" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Projects</a>
+            <a href="/notes" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Notes</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Blog</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Contact</a>
+            <a id="login-nav-item-mobile" href="/login" class="block text-center px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Login</a>
+            <a id="register-nav-item-mobile" href="/register" class="block text-center px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Register</a>
+            <button id="logout-nav-item-mobile" style="display:none;" onclick="logoutUser()" class="block text-center w-full px-4 py-2 bg-red-500 hover:bg-red-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4 mt-8 mb-16">
+        <h1 class="text-4xl font-bold mb-12 text-center text-gray-700">Our Courses</h1>
+        
+        <!-- Course Grid -->
+        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            
+            <!-- Course Card 1: HTML & CSS -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-blue-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">HTML & CSS Fundamentals</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Master the building blocks of web design. Learn to create and style beautiful, responsive websites from scratch.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+            
+            <!-- Course Card 2: JavaScript -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-yellow-200 flex items-center justify-center">
+                     <svg class="w-16 h-16 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">JavaScript for Beginners</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Unlock the power of interactivity on the web. Learn core JavaScript concepts and build dynamic web applications.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+
+            <!-- Course Card 3: Python -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-green-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.5 13.5h2.414a1 1 0 01.707.293l7.586 7.586a1 1 0 001.414 0l4.293-4.293a1 1 0 000-1.414l-7.586-7.586a1 1 0 00-.707-.293H5.5m0 0v5m0-5H3m2.5 0L1 6.5m14.5 0L19 10m-4.5 0L19 6.5M5.5 13.5L1 18m14.5 0L19 13.5"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Python Programming Masterclass</h3>
+                    <p class="text-gray-600 mb-4 text-sm">From basic syntax to advanced concepts, become a Python pro. Ideal for web development, data science, and more.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+
+            <!-- Course Card 4: React.js -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-indigo-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">React.js Deep Dive</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Build modern, fast, and scalable user interfaces with the popular React.js library. Includes Hooks and Redux.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+
+            <!-- Course Card 5: Node.js & Express -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-pink-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 19c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 0c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7z"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Node.js & Express Backend</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Develop robust and scalable backend APIs using Node.js and the Express framework. Perfect for full-stack developers.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-pink-500 hover:bg-pink-700 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+
+            <!-- Course Card 6: MongoDB -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-teal-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7s-.5 1 .5 2.5M12 11v10M12 11c0-2.21-3.582-4-8-4M20 7s.5 1-.5 2.5M12 21c-3.582 0-8-1.79-8-4"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">MongoDB for Developers</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Learn to use MongoDB, a leading NoSQL database, for flexible and scalable data storage solutions.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-teal-500 hover:bg-teal-700 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+            
+            <!-- Course Card 7: Java Essentials -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-red-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5M9 6V4a2 2 0 012-2h2a2 2 0 012 2v2m-6 0h6"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Java Essentials</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Grasp the fundamentals of Java, one of the most popular and versatile programming languages.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+
+            <!-- Course Card 8: C++ Programming -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-48 bg-purple-200 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v11.494m0 0a2.373 2.373 0 100-4.746 2.373 2.373 0 000 4.746zm4.06-4.06C17.896 11.888 19 10.056 19 8c0-3.314-2.686-6-6-6S7 4.686 7 8c0 2.056 1.104 3.888 2.94 5.187M12 3v3.253"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">C++ Programming</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Learn C++ for game development, system programming, and high-performance applications.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-block bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-5 rounded-lg transition-colors w-full text-center">View Course</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4 md:flex md:justify-center md:space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Social Links</a>
+                <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+                <a href="#" class="hover:text-white transition-colors">About</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+            </div>
+            <p>&copy; 2023 CodeWithGaurav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="/js/auth.js" defer></script>
+    <script src="/js/script.js" defer></script> 
+</body>
+</html>

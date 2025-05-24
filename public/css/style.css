@@ -1,0 +1,9 @@
+/* Basic styling for the portfolio */
+body {
+    font-family: sans-serif; /* Tailwind will override this with its default sans-serif stack if not further specified */
+    margin: 0;
+    /* background-color: #f4f4f4; Tailwind's bg-gray-100 will be used */
+    /* color: #333; Tailwind's text-gray-800 will be used */
+}
+
+/* H1 styling is now handled by Tailwind utility classes in index.html */

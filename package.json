@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "hi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GauravSapkota102/Gaurav-s.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GauravSapkota102/Gaurav-s/issues"
+  },
+  "homepage": "https://github.com/GauravSapkota102/Gaurav-s#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

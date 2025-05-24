@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - CodeWithGaurav</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="public/css/style.css">
+    <script>
+      tailwind.config = {
+        content: ["./*.html", "./public/js/**/*.js"],
+        theme: {
+          extend: {
+            transitionProperty: {
+              'height': 'height',
+              'spacing': 'margin, padding',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              }
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+              fadeIn: 'fadeIn 0.5s ease-out forwards',
+            }
+          },
+        },
+        plugins: [],
+      }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold hover:text-gray-300 transition-colors">CodeWithGaurav</a>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-4 items-center">
+                <a href="#home" class="hover:text-gray-400 transition-colors">Home</a>
+            <a href="/courses" class="hover:text-gray-400 transition-colors">Courses</a>
+            <a href="/tutorials" class="hover:text-gray-400 transition-colors">Tutorials</a>
+                <a href="#testimonials" class="hover:text-gray-400 transition-colors">Testimonials</a>
+            <a href="/notes" class="hover:text-gray-400 transition-colors">Notes</a>
+            <a href="/projects" class="hover:text-gray-400 transition-colors">Projects</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Blog</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Contact</a>
+                <a id="login-nav-item" href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Login</a>
+                <a id="register-nav-item" href="/register" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Register</a>
+                <div id="logged-in-user-info" class="text-white"></div>
+                <button id="logout-nav-item" style="display:none;" onclick="logoutUser()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Logout</button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden mt-2 space-y-2">
+            <a href="#home" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Home</a>
+            <a href="/courses" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Courses</a>
+            <a href="/tutorials" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Tutorials</a>
+            <a href="/projects" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Projects</a>
+            <a href="/notes" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Notes</a>
+            <a id="login-nav-item-mobile" href="/login" class="block text-center px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Login</a>
+            <a id="register-nav-item-mobile" href="/register" class="block text-center px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Register</a>
+            <button id="logout-nav-item-mobile" style="display:none;" onclick="logoutUser()" class="block text-center w-full px-4 py-2 bg-red-500 hover:bg-red-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Logout</button>
+            <a href="#testimonials" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Testimonials</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Blog</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Contact</a>
+            <!-- Mobile login/register/logout already handled above -->
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="bg-blue-600 text-white py-16 md:py-24 overflow-hidden"> <!-- Added overflow-hidden for safety with translations -->
+        <div class="container mx-auto text-center px-4">
+            <h1 id="hero-heading" class="text-4xl md:text-6xl font-bold mb-4 opacity-0 transform -translate-y-5">Welcome to CodeWithGaurav</h1>
+            <p id="hero-paragraph" class="text-lg md:text-xl mb-8 opacity-0 transform -translate-y-5">
+                Your one-stop destination for learning web development, programming, and more.
+            </p>
+            <a id="hero-cta" href="#" class="bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-200 text-lg opacity-0 transform hover:scale-110 transition-all duration-300">
+                Explore Courses
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4">
+        <!-- Latest Tutorials Section Placeholder -->
+        <section id="latest-tutorials" class="my-12 p-8 bg-white shadow-md rounded-lg min-h-[300px]">
+            <h2 class="text-3xl font-semibold mb-6 text-center text-gray-700">Latest Tutorials</h2>
+            <div class="h-64 bg-gray-200 rounded flex items-center justify-center">
+                <p class="text-gray-500">Content for Latest Tutorials will go here.</p>
+            </div>
+        </section>
+
+        <!-- Featured Courses Section Placeholder -->
+        <section id="featured-courses" class="my-12 p-8 bg-white shadow-md rounded-lg min-h-[300px]">
+            <h2 class="text-3xl font-semibold mb-6 text-center text-gray-700">Featured Courses</h2>
+            <div class="h-64 bg-gray-200 rounded flex items-center justify-center">
+                <p class="text-gray-500">Content for Featured Courses will go here.</p>
+            </div>
+        </section>
+
+        <!-- Testimonials Section Placeholder -->
+        <section id="testimonials" class="my-12 p-8 bg-white shadow-md rounded-lg min-h-[300px]">
+            <h2 class="text-3xl font-semibold mb-6 text-center text-gray-700">Testimonials</h2>
+            <div class="h-64 bg-gray-200 rounded flex items-center justify-center">
+                <p class="text-gray-500">Content for Testimonials will go here.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4 md:flex md:justify-center md:space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Social Links (Placeholder)</a>
+                <a href="#" class="hover:text-white transition-colors">Sitemap (Placeholder)</a>
+                <a href="#" class="hover:text-white transition-colors">About (Placeholder)</a>
+                <a href="#" class="hover:text-white transition-colors">Terms (Placeholder)</a>
+            </div>
+            <p>&copy; 2023 CodeWithGaurav. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="/js/auth.js" defer></script> <!-- Adjusted path for static serving -->
+    <script src="/js/script.js"></script> <!-- Main script, ensure auth.js is loaded first or defer script.js if it depends on auth -->
+</body>
+</html>

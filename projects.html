@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - CodeWithGaurav</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjusted for static serving -->
+    <script>
+      // Tailwind JIT configuration
+      tailwind.config = {
+        content: ["./*.html", "./public/js/**/*.js"],
+        theme: {
+          extend: {
+            transitionProperty: {
+              'height': 'height',
+              'spacing': 'margin, padding',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              }
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+              fadeIn: 'fadeIn 0.5s ease-out forwards',
+            }
+          },
+        },
+        plugins: [],
+      }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold hover:text-gray-300 transition-colors">CodeWithGaurav</a>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="/" class="hover:text-gray-400 transition-colors">Home</a>
+                <a href="/courses" class="hover:text-gray-400 transition-colors">Courses</a>
+                <a href="/tutorials" class="hover:text-gray-400 transition-colors">Tutorials</a>
+                <a href="/projects" class="hover:text-gray-400 transition-colors text-yellow-400 font-semibold">Projects</a>
+                <a href="/notes" class="hover:text-gray-400 transition-colors">Notes</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Blog</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Contact</a>
+                <a id="login-nav-item" href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Login</a>
+                <a id="register-nav-item" href="/register" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Register</a>
+                <div id="logged-in-user-info" class="text-sm text-gray-300"></div>
+                <button id="logout-nav-item" style="display:none;" onclick="logoutUser()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Logout</button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden mt-2 space-y-2">
+            <a href="/" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Home</a>
+            <a href="/courses" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Courses</a>
+            <a href="/tutorials" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Tutorials</a>
+            <a href="/projects" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors text-yellow-400 font-semibold">Projects</a>
+            <a href="/notes" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Notes</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Blog</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Contact</a>
+            <a id="login-nav-item-mobile" href="/login" class="block text-center px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Login</a>
+            <a id="register-nav-item-mobile" href="/register" class="block text-center px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Register</a>
+            <button id="logout-nav-item-mobile" style="display:none;" onclick="logoutUser()" class="block text-center w-full px-4 py-2 bg-red-500 hover:bg-red-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4 mt-8 mb-16">
+        <h1 class="text-4xl font-bold mb-12 text-center text-gray-700">My Projects</h1>
+        
+        <!-- Project Grid -->
+        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <!-- Project Card 1: Personal Portfolio Website -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-56 bg-indigo-300 flex items-center justify-center">
+                    <svg class="w-20 h-20 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">Personal Portfolio Website</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        A responsive personal portfolio website (this very project!) to showcase skills, projects, and tutorials. Built with Node.js, Express, and Tailwind CSS.
+                    </p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200 last:mr-0 mr-1">
+                            HTML
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200 last:mr-0 mr-1">
+                            TailwindCSS
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200 last:mr-0 mr-1">
+                            JavaScript
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200 last:mr-0 mr-1">
+                            Node.js
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex space-x-3">
+                    <a href="#" class="flex-1 bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Source Code
+                    </a>
+                    <a href="/" class="flex-1 bg-indigo-500 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Project Card 2: E-commerce Product Page -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-56 bg-green-300 flex items-center justify-center">
+                     <svg class="w-20 h-20 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">E-commerce Product Page</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        A detailed product page for an e-commerce site, featuring image galleries, product variations, customer reviews, and a responsive layout.
+                    </p>
+                     <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200 last:mr-0 mr-1">
+                            React
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200 last:mr-0 mr-1">
+                            CSS Modules
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200 last:mr-0 mr-1">
+                            Firebase
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex space-x-3">
+                    <a href="#" class="flex-1 bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Source Code
+                    </a>
+                    <a href="#" class="flex-1 bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 3: Weather Dashboard App -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-56 bg-blue-300 flex items-center justify-center">
+                    <svg class="w-20 h-20 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">Weather Dashboard App</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        A web application that fetches and displays current weather and forecasts for a searched location using a third-party weather API.
+                    </p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 last:mr-0 mr-1">
+                            Vue.js
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 last:mr-0 mr-1">
+                            Axios
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 last:mr-0 mr-1">
+                            OpenWeatherMap API
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex space-x-3">
+                    <a href="#" class="flex-1 bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Source Code
+                    </a>
+                    <a href="#" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 4: Task Management Tool -->
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col">
+                <div class="h-56 bg-yellow-300 flex items-center justify-center">
+                   <svg class="w-20 h-20 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">Task Management Tool</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        A simple yet effective task management application with features like adding, deleting, and marking tasks as complete.
+                    </p>
+                     <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-yellow-600 bg-yellow-200 last:mr-0 mr-1">
+                            Vanilla JS
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-yellow-600 bg-yellow-200 last:mr-0 mr-1">
+                            Local Storage
+                        </span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-yellow-600 bg-yellow-200 last:mr-0 mr-1">
+                            SCSS
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex space-x-3">
+                    <a href="#" class="flex-1 bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Source Code
+                    </a>
+                    <a href="#" class="flex-1 bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center">
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4 md:flex md:justify-center md:space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Social Links</a>
+                <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+                <a href="#" class="hover:text-white transition-colors">About</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+            </div>
+            <p>&copy; 2023 CodeWithGaurav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="/js/auth.js" defer></script>
+    <script src="/js/script.js" defer></script> 
+</body>
+</html>

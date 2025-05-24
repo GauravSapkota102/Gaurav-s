@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorials - CodeWithGaurav</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjusted for static serving -->
+    <script>
+      // Tailwind JIT configuration
+      tailwind.config = {
+        content: ["./*.html", "./public/js/**/*.js"],
+        theme: {
+          extend: {
+            transitionProperty: {
+              'height': 'height',
+              'spacing': 'margin, padding',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              }
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+              fadeIn: 'fadeIn 0.5s ease-out forwards',
+            }
+          },
+        },
+        plugins: [],
+      }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold hover:text-gray-300 transition-colors">CodeWithGaurav</a>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="/" class="hover:text-gray-400 transition-colors">Home</a>
+                <a href="/courses" class="hover:text-gray-400 transition-colors">Courses</a>
+                <a href="/tutorials" class="hover:text-gray-400 transition-colors text-yellow-400 font-semibold">Tutorials</a>
+                <a href="/projects" class="hover:text-gray-400 transition-colors">Projects</a> 
+                <a href="/notes" class="hover:text-gray-400 transition-colors">Notes</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Blog</a>
+                <a href="#" class="hover:text-gray-400 transition-colors">Contact</a>
+                <a id="login-nav-item" href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Login</a>
+                <a id="register-nav-item" href="/register" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Register</a>
+                <div id="logged-in-user-info" class="text-sm text-gray-300"></div>
+                <button id="logout-nav-item" style="display:none;" onclick="logoutUser()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors hover:scale-105 transform">Logout</button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden mt-2 space-y-2">
+            <a href="/" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Home</a>
+            <a href="/courses" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Courses</a>
+            <a href="/tutorials" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors text-yellow-400 font-semibold">Tutorials</a>
+            <a href="/projects" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Projects</a>
+            <a href="/notes" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Notes</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Blog</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded transition-colors">Contact</a>
+            <a id="login-nav-item-mobile" href="/login" class="block text-center px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Login</a>
+            <a id="register-nav-item-mobile" href="/register" class="block text-center px-4 py-2 bg-green-500 hover:bg-green-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Register</a>
+            <button id="logout-nav-item-mobile" style="display:none;" onclick="logoutUser()" class="block text-center w-full px-4 py-2 bg-red-500 hover:bg-red-700 text-white font-bold rounded mt-2 transition-colors hover:scale-105 transform">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4 mt-8 mb-16">
+        <h1 class="text-4xl font-bold mb-12 text-center text-gray-700">Tutorials & Articles</h1>
+        
+        <div class="lg:flex lg:space-x-12">
+            <!-- Tutorial List -->
+            <div class="lg:w-3/4">
+                <div class="space-y-10">
+                    <!-- Tutorial Item 1 -->
+                    <article class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">Understanding Promises in JavaScript</a>
+                        </h2>
+                        <div class="flex flex-wrap items-center text-sm text-gray-500 mb-3 space-x-2">
+                            <span>By Gaurav S.</span>
+                            <span>&bull;</span>
+                            <span>Oct 26, 2023</span>
+                            <span>&bull;</span>
+                            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs">JavaScript</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs">Web Development</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Promises are a fundamental part of asynchronous programming in modern JavaScript. This tutorial will walk you through what Promises are, how they work, and how to use them effectively to manage async operations and avoid callback hell.
+                        </p>
+                        <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto mb-4 font-mono text-sm"><code>const myPromise = new Promise((resolve, reject) => {
+  // Asynchronous operation here
+  setTimeout(() => {
+    const success = true; // Simulate success/failure
+    if (success) {
+      resolve("Operation succeeded!");
+    } else {
+      reject("Operation failed.");
+    }
+  }, 1000);
+});
+
+myPromise
+  .then(message => console.log(message))
+  .catch(error => console.error(error));</code></pre>
+                        <a href="#" class="inline-block text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors">Read More &rarr;</a>
+                    </article>
+
+                    <!-- Tutorial Item 2 -->
+                    <article class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-3">
+                            <a href="#" class="text-green-600 hover:text-green-800 transition-colors">Getting Started with Tailwind CSS</a>
+                        </h2>
+                        <div class="flex flex-wrap items-center text-sm text-gray-500 mb-3 space-x-2">
+                            <span>By Jane D.</span>
+                            <span>&bull;</span>
+                            <span>Oct 20, 2023</span>
+                            <span>&bull;</span>
+                            <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs">Tailwind CSS</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs">CSS</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Tailwind CSS is a utility-first CSS framework that allows for rapid UI development. Learn how to set it up, understand its core concepts, and start building beautiful, custom designs without writing traditional CSS.
+                        </p>
+                         <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto mb-4 font-mono text-sm"><code>&lt;div class="bg-blue-500 text-white p-4 rounded-lg shadow-md"&gt;
+  Hello, Tailwind!
+&lt;/div&gt;</code></pre>
+                        <a href="#" class="inline-block text-green-600 hover:text-green-800 font-semibold hover:underline transition-colors">Read More &rarr;</a>
+                    </article>
+
+                    <!-- Tutorial Item 3 -->
+                    <article class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-3">
+                            <a href="#" class="text-purple-600 hover:text-purple-800 transition-colors">Python List Comprehensions Explained</a>
+                        </h2>
+                        <div class="flex flex-wrap items-center text-sm text-gray-500 mb-3 space-x-2">
+                            <span>By Alex M.</span>
+                            <span>&bull;</span>
+                            <span>Oct 15, 2023</span>
+                            <span>&bull;</span>
+                            <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs">Python</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs">Programming</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            List comprehensions provide a concise way to create lists in Python. This tutorial covers the syntax, examples, and benefits of using list comprehensions to make your Python code more readable and efficient.
+                        </p>
+                        <a href="#" class="inline-block text-purple-600 hover:text-purple-800 font-semibold hover:underline transition-colors">Read More &rarr;</a>
+                    </article>
+                    
+                    <!-- Tutorial Item 4 -->
+                    <article class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-3">
+                            <a href="#" class="text-red-600 hover:text-red-800 transition-colors">Building a Simple REST API with Node.js</a>
+                        </h2>
+                        <div class="flex flex-wrap items-center text-sm text-gray-500 mb-3 space-x-2">
+                            <span>By Sarah B.</span>
+                            <span>&bull;</span>
+                            <span>Oct 10, 2023</span>
+                            <span>&bull;</span>
+                            <span class="bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs">Node.js</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs">Backend</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Learn the basics of building a RESTful API using Node.js and Express. We'll cover routing, request handling, and sending JSON responses. A great starting point for backend development.
+                        </p>
+                        <a href="#" class="inline-block text-red-600 hover:text-red-800 font-semibold hover:underline transition-colors">Read More &rarr;</a>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Sidebar (Optional) -->
+            <aside class="lg:w-1/4 mt-12 lg:mt-0">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-blue-500 hover:text-blue-700 hover:underline">JavaScript (5)</a></li>
+                        <li><a href="#" class="text-green-500 hover:text-green-700 hover:underline">Tailwind CSS (2)</a></li>
+                        <li><a href="#" class="text-purple-500 hover:text-purple-700 hover:underline">Python (3)</a></li>
+                        <li><a href="#" class="text-red-500 hover:text-red-700 hover:underline">Node.js (1)</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-gray-700 hover:underline">Web Development (10)</a></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg mt-8">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Recent Posts</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline text-sm">Understanding Promises in JavaScript</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-green-600 hover:underline text-sm">Getting Started with Tailwind CSS</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-purple-600 hover:underline text-sm">Python List Comprehensions Explained</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4 md:flex md:justify-center md:space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Social Links</a>
+                <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+                <a href="#" class="hover:text-white transition-colors">About</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+            </div>
+            <p>&copy; 2023 CodeWithGaurav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="/js/auth.js" defer></script>
+    <script src="/js/script.js" defer></script> 
+</body>
+</html>
